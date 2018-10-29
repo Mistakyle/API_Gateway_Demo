@@ -151,10 +151,10 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="85" />
-    <option name="y" value="25" />
-    <option name="width" value="1750" />
-    <option name="height" value="970" />
+    <option name="x" value="84" />
+    <option name="y" value="24" />
+    <option name="width" value="1751" />
+    <option name="height" value="971" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -195,7 +195,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="8.12.0" />
-    <property name="last_opened_file_path" value="C:/Program Files/Git/git-cmd.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="npm" />

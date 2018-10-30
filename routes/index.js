@@ -19,7 +19,7 @@ router.get('/demo', function (req, res, next) {
     //TODO: get this into git
     //TODO: need to learn pug and see if we can make this thing more beauiful
     //TODO: find a way out of async hell
-    request('https://news.wfu.edu/wp-json/wp/v2/posts', function(error, response, body) {
+    request('https://sjnaz4dcif.execute-api.us-east-2.amazonaws.com/beta/demo', function(error, response, body) {
         console.log('error:', error); // Print the error if one occurred
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
         body = JSON.parse(body);

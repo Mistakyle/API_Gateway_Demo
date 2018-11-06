@@ -1,9 +1,23 @@
 let request = require('request');
-let axios = require('axios')
+let axios = require('axios');
 
-//uses the request library to grab the data from the WP site.  It uses the request library and JSON parser to make sense of it
-module.exports.grabHtml = async function(link, callback) {
-    return axios.get(link)
+//uses axios to grab the json data stored at the passed in link.  Then checks for a aprticular id field that will
+//exist in this iteration.  Once we have that id
+module.exports.grabHtml = async function(link, postId) {
+    let i = 0;
+    let indexId = 0;
+    let data = await axios.get(link);
+    for (i = 0; i < data.data.length; i++) {
+        //console.log(data.data[i]["id"]);
+        if (data.data[i]["id"] === postId) {
+            console.log("FOUUND ID " + indexId);
+            return data.data[i]
+
+        }
+    }
+
+    return null
+
 };
 
 

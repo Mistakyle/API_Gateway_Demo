@@ -1,42 +1,42 @@
 let request = require('request');
-
 let express = require('express');
 let router = express.Router();
-let util  = require('../public/javascripts/Utility');
-let axios = require('axios');  //https://github.com/axios/axios
+let util = require('../public/javascripts/Utility');
+let axios = require('axios'); //https://github.com/axios/axios
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    res.render('index', {
+        title: 'Express'
+    });
 });
 
-router.get('/demo', function (req, res, next) {
-let link  = 'https://sjnaz4dcif.execute-api.us-east-2.amazonaws.com/beta/demo'
-    /*
-    To loop through and get all the news storied, run a loop get all unique ids, then
-    run the loop over [i]["content"].rendered as many times as necessary
-     */
+router.get('/demo', function(req, res, next) {
 
-    /*
-    request('https://sjnaz4dcif.execute-api.us-east-2.amazonaws.com/beta/demo', function(error, response, body) {
-        console.log('error:', error); // Print the error if one occurred
-        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        body = JSON.parse(body);
-        res.render('demo', {title: body[0]["content"].rendered});  //to get the different articles [1][content].rendered, [2]....
-        //console.log((body[0]["id"])); //[0][whatever json field it is you want to access] https://stackoverflow.com/questions/42326078/access-json-fields-in-body-of-message
-    })
-    */
-    /*
-    axios.get('https://sjnaz4dcif.execute-api.us-east-2.amazonaws.com/beta/demo').then((body)=>
-    //console.log(data.data[0]["content"]))
-    res.render('demo', {title: body.data[0]["content"].rendered}));
-*/
+    //grab the postID we want to access from the query params
+    let id = req.query.postId;
+
+    //we have to parse this as an int because otherwise when we are searching for a match we will compare into to string
+    //which produces unwanted events
+    id = (parseInt(id));
+
+    //aws api gateway link
+    let link = 'https://sjnaz4dcif.execute-api.us-east-2.amazonaws.com/beta/demo';
+
 
     //use the util function, once we have gotten the data from it (.then) render it on the page using pug
-    util.grabHtml(link).then((body) => {
-        res.render('demo', {title: body.data[0]["content"].rendered})
+    //the grabhtml page will return the body object of the post with the id grabbed from query params
+    util.grabHtml(link, id).then((body) => {
+        if (body) {
+            res.render('demo', {
+                title: body["content"].rendered
+            })
+        } else {
+            res.render('demo', {
+                title: "Specified id not found "
+            })
+        }
     });
-})
+});
 
 module.exports = router;
-

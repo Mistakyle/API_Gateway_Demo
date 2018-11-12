@@ -3,9 +3,28 @@ let express = require('express');
 let router = express.Router();
 let util = require('../public/javascripts/Utility');
 let axios = require('axios'); //https://github.com/axios/axios
+let amplify = require('aws-amplify')
 
+
+ // NEED TO GET THE ACCESS TOKEN TO TEST WITH APO GATEWAY.  I THINK I NEED TO BE HITTING THIS URL
+// NOT SURE THOUGH. gETTING A CANNOT FIND URL ERROR, EVEN THOUGH COGNITO SAYS THIS IS THE URL...??
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+    let link = `
+        https://wfu2.auth.us-east-2.amazoncognito.com/oauth2/token?
+        Content-Type='application/x-www-form-urlencoded'&
+        Authorization=Basic aSdxd892iujendek328uedj
+
+       grant_type=authorization_code&
+       client_id=djc98u3jiedmi283eu928&
+       code=AUTHORIZATION_CODE&
+       redirect_uri=localhost:3000/demo`
+    let data = await axios.post(link).catch(error =>{
+        console.log(error)
+
+    })
+
+    console.log(data)
     res.render('index', {
         title: 'Express'
     });

@@ -5,29 +5,22 @@ let util = require('../public/javascripts/Utility');
 let axios = require('axios'); //https://github.com/axios/axios
 let amplify = require('aws-amplify')
 
+//TODO:  Have a link that goes to WFU via GMAIL :DONE
+//TODO:  Have a link that goes to rendered news via AWS signin :Done uses redirect
 
- // NEED TO GET THE ACCESS TOKEN TO TEST WITH APO GATEWAY.  I THINK I NEED TO BE HITTING THIS URL
-// NOT SURE THOUGH. gETTING A CANNOT FIND URL ERROR, EVEN THOUGH COGNITO SAYS THIS IS THE URL...??
 /* GET home page. */
+
+//this is used for google/user signin
 router.get('/', async function(req, res, next) {
-    let link = `
-        https://wfu2.auth.us-east-2.amazoncognito.com/oauth2/token?
-        Content-Type='application/x-www-form-urlencoded'&
-        Authorization=Basic aSdxd892iujendek328uedj
 
-       grant_type=authorization_code&
-       client_id=djc98u3jiedmi283eu928&
-       code=AUTHORIZATION_CODE&
-       redirect_uri=localhost:3000/demo`
-    let data = await axios.post(link).catch(error =>{
-        console.log(error)
+    // res.redirect("https://wfu3.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=61545m2dcj7vf8cd2uteiro5fv&redirect_uri=http://localhost:3000/redirect")
+    res.redirect("https://wfu3.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=61545m2dcj7vf8cd2uteiro5fv&redirect_uri=https://www.wfu.edu")
 
-    })
 
-    console.log(data)
-    res.render('index', {
-        title: 'Express'
-    });
+
+    //res.render('index', {
+    //title: 'Express'
+    //});
 });
 
 router.get('/demo', function(req, res, next) {
@@ -58,4 +51,10 @@ router.get('/demo', function(req, res, next) {
     });
 });
 
-module.exports = router;
+
+//hits this route then goes to demo,  using this as a dummy redirect
+router.get('/redirect', function(req, res) {
+    res.redirect("https://wfuadmin.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=45hdeek22ld0aki8ie1nu2cee5&redirect_uri=http://localhost:3000/demo?postId=50483")
+})
+
+module.exports = router;    

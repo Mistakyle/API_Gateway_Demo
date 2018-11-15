@@ -8,13 +8,15 @@ let amplify = require('aws-amplify')
 //TODO:  Have a link that goes to WFU via GMAIL :DONE
 //TODO:  Have a link that goes to rendered news via AWS signin :Done uses redirect
 
+// hard stuck at getting authorization tokens.  good articule bookmarked on work pc.  also postman is there 
+
 /* GET home page. */
 
 //this is used for google/user signin
 router.get('/', async function(req, res, next) {
 
     // res.redirect("https://wfu3.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=61545m2dcj7vf8cd2uteiro5fv&redirect_uri=http://localhost:3000/redirect")
-    res.redirect("https://wfu3.auth.us-east-2.amazoncognito.com/login?response_type=code&client_id=61545m2dcj7vf8cd2uteiro5fv&redirect_uri=https://www.wfu.edu")
+    res.redirect("https://wfu3.auth.us-east-2.amazoncognito.com/oauth2/authorize?response_type=code&client_id=61545m2dcj7vf8cd2uteiro5fv&redirect_uri=https://www.wfu.edu")
 
 
 
